@@ -14,12 +14,13 @@
         @endif
 
         <div class="flex gap-3 mb-4">
-            <a href="{{ url('/dashboard') }}"
-                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded shadow-sm transition">Beranda</a>
+            {{-- <a href="{{ url('/dashboard') }}"
+                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded shadow-sm transition">Beranda</a> --}}
 
             <a href="{{ route('karyawans.create') }}"
                 class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded shadow-sm transition">Tambah
-                Karyawan</a>
+                Karyawan
+            </a>
         </div>
 
         <div class="overflow-x-auto rounded-lg shadow border border-gray-200 dark:border-gray-700">
@@ -33,10 +34,6 @@
                         <th
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                             Nama
-                        </th>
-                        <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-                            NIP
                         </th>
                         <th
                             class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
@@ -57,17 +54,19 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $karyawan->nama }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $karyawan->nip }}</td>
+
                             <td class="px-6 py-4 whitespace-nowrap">{{ $karyawan->jabatan }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 Rp {{ number_format($karyawan->gaji_pokok, 2, ',', '.') }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap space-x-2">
-                                <a href="{{ route('karyawans.edit', $karyawan->id) }}"
+                                {{-- PERBAIKAN DI SINI: Menggunakan id_karyawan --}}
+                                <a href="{{ route('karyawans.edit', $karyawan->id_karyawan) }}"
                                     class="inline-block px-3 py-1 bg-yellow-400 hover:bg-yellow-500 text-black rounded text-sm transition">
                                     Edit
                                 </a>
-                                <form action="{{ route('karyawans.destroy', $karyawan->id) }}" method="POST"
+                                {{-- PERBAIKAN DI SINI JUGA: Menggunakan id_karyawan --}}
+                                <form action="{{ route('karyawans.destroy', $karyawan->id_karyawan) }}" method="POST"
                                     class="inline-block" onsubmit="return confirm('Yakin hapus karyawan ini?');">
                                     @csrf
                                     @method('DELETE')

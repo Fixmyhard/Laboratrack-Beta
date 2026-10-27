@@ -21,7 +21,7 @@
 
         {{-- Navbar --}}
         <nav class="bg-white dark:bg-gray-800 shadow-md w-full flex items-center h-16">
-            <!-- Logo + Nama aplikasi, nempel kiri layar -->
+
             <a href="{{ route('dashboard') }}" class="flex items-center select-none space-x-3 ml-4">
                 <img src="{{ asset('images/laboratrack.png') }}" alt="Logo" class="h-10 w-auto" />
                 <span class="text-xl font-semibold text-gray-900 dark:text-gray-100">Laboratrack</span>
@@ -41,9 +41,45 @@
                         class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition">
                         Karyawan
                     </a>
-                    <a href="#"
+                    
+                    {{-- DROPDOWN ABSENSI --}}
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="inline-flex items-center text-gray-700 dark:text-gray-300 font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">
+                                Absensi
+                                <svg class="ml-1 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+                        </x-slot>
+
+                        <x-slot name="content">
+                            <x-dropdown-link href="{{ route('absensi_harian.index') }}">
+                                Absensi Harian
+                            </x-dropdown-link>
+
+                            <x-dropdown-link href="{{ route('absensi.index') }}">
+                                Rekap Absensi Bulanan
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
+
+                    {{-- MENU KALENDER (DIPINDAHKAN KELUAR DARI DROPDOWN) --}}
+                    <a href="{{ route('kalender.index') }}"
                         class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition">
-                        About
+                        Kalender
+                    </a>
+
+                    <a href="{{ route('penggajian.index') }}"
+                        class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition">
+                        Penggajian
+                    </a>
+                    <a href="{{ route('bantuan') }}"
+                        class="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium transition">
+                        Bantuan
                     </a>
                 </div>
 
@@ -51,7 +87,7 @@
                     @csrf
                     <button type="submit"
                         class="text-sm font-medium text-gray-700 hover:text-red-600 dark:text-gray-300 dark:hover:text-red-500 transition">
-                        Logout
+                        Keluar
                     </button>
                 </form>
             </div>

@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('karyawans', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->string('nip')->unique();
+            $table->integer('id_karyawan')->autoIncrement();
+            $table->string('nama')->unique();
             $table->string('jabatan');
             $table->decimal('gaji_pokok', 12, 2);
             $table->timestamps();

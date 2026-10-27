@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('gajis', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('karyawan_id')->constrained();
+            //id_gaji sebagai primary key
+            // id_karyawan sebagai foreign key
             $table->date('periode_awal');
             $table->date('periode_akhir');
             $table->decimal('gaji_dibayar', 12, 2);

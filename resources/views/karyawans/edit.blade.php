@@ -1,5 +1,3 @@
-<!-- resources/views/karyawans/edit.blade.php -->
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-3xl text-gray-800 dark:text-gray-200 leading-tight text-center relative">
@@ -18,32 +16,57 @@
             </div>
         @endif
 
-        <form action="{{ route('karyawans.update', $karyawan->id) }}" method="POST" class="space-y-6">
+        <form action="{{ route('karyawans.update', $karyawan->id_karyawan) }}" method="POST" class="space-y-6">
             @csrf
             @method('PUT')
 
+            {{-- NAMA --}}
             <div>
                 <label for="nama" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama</label>
-                <input type="text" name="nama" id="nama" required value="{{ old('nama', $karyawan->nama) }}"
+                <input type="text" name="nama" id="nama" required
+                    value="{{ old('nama', $karyawan->nama) }}"
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" />
             </div>
 
+            {{-- JABATAN --}}
             <div>
-                <label for="nip" class="block text-sm font-medium text-gray-700 dark:text-gray-300">NIP</label>
-                <input type="text" name="nip" id="nip" required value="{{ old('nip', $karyawan->nip) }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" />
+                <label for="jabatan" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Jabatan
+                </label>
+
+                <input type="hidden" name="jabatan" id="jabatan" value="{{ old('jabatan', $karyawan->jabatan) }}">
+
+                <x-dropdown width="48">
+                    <x-slot name="trigger">
+                        <button type="button"
+                            class="w-full flex justify-between items-center px-4 py-2 bg-gray-100 dark:bg-gray-700 
+                            rounded-md border dark:border-gray-600 text-left">
+                            <span id="selectedJabatan">
+                                {{ old('jabatan', $karyawan->jabatan) ?: 'Pilih Jabatan' }}
+                            </span>
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        @foreach ($daftarJabatan as $j)
+                            <x-dropdown-link
+                                onclick="event.preventDefault(); 
+                                         document.getElementById('jabatan').value='{{ $j }}'; 
+                                         document.getElementById('selectedJabatan').innerText='{{ $j }}';">
+                                {{ $j }}
+                            </x-dropdown-link>
+                        @endforeach
+                    </x-slot>
+                </x-dropdown>
             </div>
 
+            {{-- GAJI POKOK --}}
             <div>
-                <label for="jabatan" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jabatan</label>
-                <input type="text" name="jabatan" id="jabatan" required
-                    value="{{ old('jabatan', $karyawan->jabatan) }}"
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" />
-            </div>
-
-            <div>
-                <label for="gaji_pokok" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gaji
-                    Pokok</label>
+                <label for="gaji_pokok" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gaji Pokok</label>
                 <input type="text" name="gaji_pokok" id="gaji_pokok" required
                     value="{{ old('gaji_pokok', intval($karyawan->gaji_pokok)) }}"
                     class="mt-1 block rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 w-full max-w-xl"
@@ -51,6 +74,7 @@
                     title="Hanya boleh memasukkan angka" />
             </div>
 
+            {{-- BUTTONS --}}
             <div class="flex space-x-4">
                 <button type="submit"
                     class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
@@ -61,6 +85,7 @@
                     Batal
                 </a>
             </div>
+
         </form>
     </div>
 </x-app-layout>

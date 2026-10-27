@@ -18,22 +18,9 @@
 
 <body class="antialiased dark:bg-[#0F0F0F] bg-[#F8F8F8] text-gray-900 dark:text-gray-100">
     <header class="flex justify-end p-4">
-        @if (Route::has('login'))
-            <nav class="space-x-3">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="text-sm text-gray-700 dark:text-gray-300 hover:underline">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="text-sm text-gray-700 dark:text-gray-300 hover:underline">Login</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="text-sm text-gray-700 dark:text-gray-300 hover:underline">Register</a>
-                    @endif
-                @endauth
-            </nav>
-        @endif
+
     </header>
+
 
     <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-700">
         <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-5xl lg:flex-row">
@@ -58,24 +45,25 @@
                         <span>Real-time reporting and employee monitoring</span>
                     </li>
                 </ul>
+                <a>
 
+                </a>
                 <div class="mt-6">
+                    <li class="flex items-start gap-2">
+                        <span class="text-gray-600 dark:text-gray-300"></span>
+                    </li>
+
                     <a href="{{ route('login') }}"
                         class="inline-block px-5 py-2 bg-[#1b1b18] text-white dark:bg-white dark:text-[#1C1C1A] rounded hover:bg-black dark:hover:bg-gray-100 transition">
-                        Start Now
+                        Start Now!
                     </a>
                 </div>
             </div>
 
             <div
                 class="bg-[#f1f5f9] dark:bg-[#131313] w-full lg:w-[420px] p-4 rounded-t-lg lg:rounded-r-lg flex items-center justify-center">
-                {{-- Placeholder Logo --}}
-                <svg class="w-40 h-40 text-[#4A90E2] dark:text-[#00BFFF]" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373
-                        12-12S18.627 0 12 0zm0 22C6.486 22 2 17.514
-                        2 12S6.486 2 12 2s10 4.486 10 10-4.486 10-10
-                        10zm1-15h-2v6h6v-2h-4z" />
-                </svg>
+                <img src="{{ asset('images/laboratrack.png') }}" alt="Logo"
+                    class="h-12 sm:h-16 md:h-20 lg:h-24 w-auto" />
             </div>
         </main>
     </div>
